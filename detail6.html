@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+    <link href='https://as.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <title>ADSR</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+            integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="header-pc">
+      <div class="header-box">
+        <h1><a href="index.html"><img src="img/footer-logo.png" alt="ADSRのロゴ"></a></h1>
+        
+        <nav class="pc-nav">
+          <ul>
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="bs.html">Best Seller</a></li>
+            <li><a href="https://www.instagram.com/a.d.s.r._official/" target="blank"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </nav>
+        
+      </div>
+    </header>
+    
+    <header class="header-mb">
+      <h1><a href="index.html"><img src="img/footer-logo.png" alt="ADSRのロゴ"></a></h1>
+      <div id="nav-toggle">
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      </div>
+
+      <div id="gloval-nav">
+        <nav>
+          <ul>
+            <li><a href="index.html">TOP</a></li>
+            <li class="liBS"><a href="bs.html">Best Seller</a></li>
+            <li>
+                <a href="https://www.instagram.com/a.d.s.r._official/"><i class="fab fa-instagram"></i></a>
+            </li>
+          
+
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main-detail">
+        <div class="app">
+            <h4 class="mb-h4">LOU 01</h4>
+            <section class="carousel">
+                <div class="carousel__main">
+                    <transition name="active">
+                        <div class="carousel__main" :key="images[active].id" v-show="active === images[active].id">
+                            <img :src="images[active].img">
+                            <div @click="prev" class="carousel__prev"><i class="fas fa-angle-left fa-5x"></i></div>
+                            <div @click="next" class="carousel__next"><i class="fas fa-angle-right fa-5x"></i></div>
+                        </div>
+                    </transition>
+                </div>
+                <div class="thumbnails">
+                  <h4>LOU 01</h4>
+                  <ul class="carousel__thumbnails">
+                    <li v-for="(image, id) in images" :key="image.id" :class="{current: active == image.id}" @click= "current(image.id)">
+                      <img :src="image.img">
+                    </li>
+                  </ul>
+                </div>
+            </section>
+        </div>
+    
+    </main>
+
+    <footer class="footer-top">
+      <a href="index.html"><img src="img/footer-logo.png" alt="ADSR">
+      
+      </a>
+      <div class="footer-flex">
+        <a href="https://www.instagram.com/a.d.s.r._official/" target="blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/a.d.s.r._official/" target="blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/a.d.s.r._official/" target="blank"><i class="fab fa-facebook"></i></a>
+      </div>
+      <p>Office. Yotsubashi FYS Bld.4F, 4-13-18, Minamisemba, Chuo-ku Osaka-shi, Osaka, 542-0081, Japan | Tel. 06-6563-7684</p>
+      <p  class="footer-text">&copy;  A.D.S.R. FOUNDATION ALL RIGHTS RESERVED.</p>
+    </footer>
+    <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js'></script> -->
+    <script src="js/menu.js"></script>
+    <script>
+        let app = new Vue({
+            el: ('.app'),
+            data(){
+                return {
+                  active: 0,
+                  images: [
+                    { id: 0, img: "img/lou1-1.jpg" },
+                    { id: 1, img: "img/lou1-2.jpg" },
+                    { id: 2, img: "img/lou1-3.jpg" },
+                    { id: 3, img: "img/lou1-4.jpg" },
+                    { id: 4, img: "img/detail1.jpg" },
+                    { id: 5, img: "img/detail2.jpg" },
+                  ],
+                };
+            },
+            methods:{
+                current(id){
+                    this.active = id
+                },
+                prev(){
+                    if(this.active <= 0){
+                        this.active = this.images.length -1
+                    } else{
+                        this.active--
+                    }
+                },
+                next(){
+                    if(this.active >= this.images.length -1){
+                        this.active = 0
+                    } else{
+                        this.active++
+                    }
+                }
+            },
+            mounted(){
+                let that = this 
+                setInterval(()=>{
+                    that.next()
+                },4000)
+            }
+        })
+    </script>
+
+  </body>
+</html>
